@@ -14,8 +14,6 @@ public class CateringItem {
     private String itemType;
 
     //Constructor
-    public CateringItem(){
-    }
 
     public CateringItem (String itemType, String itemCode, String itemName,
                          double priceOfItem) {
@@ -41,4 +39,7 @@ public class CateringItem {
         return itemName;
     }
 
+    public String getItemCode() {
+        return itemCode;
+    }
 }

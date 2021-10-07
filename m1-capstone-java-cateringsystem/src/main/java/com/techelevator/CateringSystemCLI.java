@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import com.techelevator.filereader.InventoryFileReader;
 import com.techelevator.view.Menu;
 
 /*
@@ -21,6 +22,8 @@ public class CateringSystemCLI {
 	 * Remember every class and data structure is a data types and can be passed as arguments to methods or constructors.
 	 */
 	private Menu menu;
+	private InventoryFileReader inventoryFileReader = new InventoryFileReader();
+
 
 	public CateringSystemCLI(Menu menu) {
 		this.menu = menu;
@@ -46,10 +49,9 @@ public class CateringSystemCLI {
 			*/
 			menu.mainMenu();
 
-
 			String userChoice = menu.mainMenu();
-			if(userChoice.equals(1)){
-
+			if(userChoice.equals("1")){
+				return;
 			}
 
 
