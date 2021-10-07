@@ -1,5 +1,7 @@
 package com.techelevator.view;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 /*
@@ -21,4 +23,28 @@ public class Menu {
 		System.out.println("*************************");
 		System.out.println();
 	}
+
+	//Should display main menu as System.out.println()
+	//(1) Display Catering Items
+	//(2) Order
+    //(3) Quit
+
+	public String mainMenu() {
+		System.out.println();
+		System.out.println("(1) Display Catering Item");
+		System.out.println("(2) Order");
+		System.out.println("(3) Quit");
+		System.out.println();
+        System.out.println("Please select one of the options:");
+		String userChoice = in.nextLine();
+		return userChoice;
+
+		//Instantiate the options and assign into a variable
+	}
+
+	//Need user input to choose from main menu (this class has main method to execute)
+	//Need user input to choose 1-3
+//	String userInput = in.nextLine();
+
+
 }

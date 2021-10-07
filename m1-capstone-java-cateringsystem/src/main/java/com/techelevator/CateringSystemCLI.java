@@ -44,6 +44,16 @@ public class CateringSystemCLI {
 			ELSE IF the User's Choice is Purchase,
 				THEN go to the purchase menu
 			*/
+			menu.mainMenu();
+
+
+			String userChoice = menu.mainMenu();
+			if(userChoice.equals(1)){
+
+			}
+
+
+			break;
 		}
 	}
 
