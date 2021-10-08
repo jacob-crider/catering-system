@@ -1,7 +1,10 @@
 package com.techelevator;
 
 import com.techelevator.filereader.InventoryFileReader;
+import com.techelevator.items.CateringItem;
 import com.techelevator.view.Menu;
+
+import java.util.Map;
 
 /*
  * This class should control the workflow of the application, but not do any other work
@@ -22,7 +25,9 @@ public class CateringSystemCLI {
 	 * Remember every class and data structure is a data types and can be passed as arguments to methods or constructors.
 	 */
 	private Menu menu;
-	private InventoryFileReader inventoryFileReader = new InventoryFileReader();
+	private CateringSystem cateringSystem = new CateringSystem();
+	private InventoryFileReader fileReader = new InventoryFileReader(); // instantiated fileReader
+	private CateringItem cateringItem = new CateringItem();
 
 
 	public CateringSystemCLI(Menu menu) {
@@ -47,15 +52,18 @@ public class CateringSystemCLI {
 			ELSE IF the User's Choice is Purchase,
 				THEN go to the purchase menu
 			*/
-			menu.mainMenu();
+
+			// fileReader.itemsInInventory is calling our method which contains the Map of key/values pairs we created
+			cateringSystem.setInventoryMap(fileReader.itemsInInventory());
 
 			String userChoice = menu.mainMenu();
 			if(userChoice.equals("1")){
-				return;
+				menu.printCateringItems(cateringSystem.getInventoryMap());
+			}
+			if(userChoice.equals("2")) {
+				menu.purchasingMenu();
 			}
 
-
-			break;
 		}
 	}
 

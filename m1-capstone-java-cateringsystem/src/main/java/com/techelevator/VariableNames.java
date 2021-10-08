@@ -18,6 +18,8 @@ public class VariableNames {
         -itemDetails (our String array that SPLIT the "file" \\|)
         -items (the array of items)
 
+    CateringSystem
+        -inventoryMap (variable that holds the inventory Map from the FileReader)
 
 
 

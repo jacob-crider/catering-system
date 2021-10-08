@@ -1,7 +1,11 @@
 package com.techelevator.view;
 
+import com.techelevator.filereader.InventoryFileReader;
+import com.techelevator.items.CateringItem;
+
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Map;
 import java.util.Scanner;
 
 /*
@@ -15,6 +19,7 @@ import java.util.Scanner;
 public class Menu {
 	
 	private static final Scanner in = new Scanner(System.in);
+
 
 	public void showWelcomeMessage() {
 		System.out.println("*************************");
@@ -40,6 +45,20 @@ public class Menu {
 		return userChoice;
 
 		//Instantiate the options and assign into a variable
+	}
+
+	public void printCateringItems(Map<String, CateringItem> inventoryItems) {
+		for (Map.Entry<String, CateringItem> items : inventoryItems.entrySet()) {
+			System.out.println(items.getKey() + " " + items.getValue().getPriceOfItem());
+		}
+	}
+
+	public void purchasingMenu() {
+		System.out.println();
+		System.out.println("(1) Add Money");
+		System.out.println("(2) Select Product");
+		System.out.println("(3) Complete Transaction");
+		System.out.println("Current Amount Balance: ");
 	}
 
 	//Need user input to choose from main menu (this class has main method to execute)

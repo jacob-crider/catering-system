@@ -17,20 +17,21 @@ public class InventoryFileReader {
     private String inventoryFileName;
 
     //We want to add a max value (25) of each item
-    private static final int STARTING_INVENTORY = 25;
+
 
     //Constructor
 //    public InventoryFileReader(String inventoryFileName) throws FileNotFoundException {
 //        this.inventoryFileName = inventoryFileName;
     //Passing the csv file and assigning it into variable "fileName"
     //Then passing "fileName" as a new file called "file"
-    public Map<String, Double> itemsInInventory() {
+    public Map<String, CateringItem> itemsInInventory() {
 
         String fileName = "cateringsystem.csv";
         File file = new File(fileName);
         //Create an array of items from the file
         List<CateringItem> itemList = new ArrayList<CateringItem>();
-        Map inventory = new LinkedHashMap<String, Double>();
+        //Put list of items into a key, value paired Map with itemCode, priceOfItem
+        Map<String, CateringItem> inventory = new LinkedHashMap<String, CateringItem>();
 
         try (Scanner fileScanner = new Scanner(file)) {
             while (fileScanner.hasNextLine()) {
@@ -44,7 +45,7 @@ public class InventoryFileReader {
             }
 
             for (CateringItem items : itemList) {
-                inventory.put(items.getItemCode(), items.getPriceOfItem());
+                inventory.put(items.getItemCode(), items);
             }
 
         } catch (FileNotFoundException e) {

@@ -12,8 +12,15 @@ public class CateringItem {
     private String itemName;
     private String itemCode;
     private String itemType;
+    private int startingQuantity;
+    private int itemBought;
+
 
     //Constructor
+
+    public CateringItem() {
+
+    }
 
     public CateringItem (String itemType, String itemCode, String itemName,
                          double priceOfItem) {
@@ -21,14 +28,16 @@ public class CateringItem {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.priceOfItem = priceOfItem;
+        startingQuantity = 25;
     }
 
-    public CateringItem (String itemCode, double priceOfItem) {
-        this.itemCode = itemCode;
-        this.priceOfItem = priceOfItem;
+    public int stockOfItem() {
+        if (startingQuantity == 0) {
+            return Integer.parseInt("SOLD OUT");
+        } else {
+            startingQuantity -= itemBought;
+        } return startingQuantity;
     }
-
-
 
     //Getter
     public double getPriceOfItem() {
@@ -41,5 +50,9 @@ public class CateringItem {
 
     public String getItemCode() {
         return itemCode;
+    }
+
+    public int getStartingQuantity() {
+        return startingQuantity;
     }
 }
