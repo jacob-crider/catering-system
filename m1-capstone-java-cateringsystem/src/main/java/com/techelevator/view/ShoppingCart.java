@@ -1,6 +1,6 @@
 package com.techelevator.view;
-import com.techelevator.items.CateringItem;
 
+import com.techelevator.items.CateringItem;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +12,13 @@ public class ShoppingCart {
         items = new ArrayList<>();
     }
 
-    public double addItem(CateringItem item, int qty) {
-        CartItem c_item = new CartItem(item, qty);
-        items.add(c_item);
-        return c_item.getSubtotal();
+    public double addItem(CateringItem item, int quantity) {
+        CartItem cartItem = new CartItem(item, quantity);
+        items.add(cartItem);
+        return cartItem.getSubtotal();
     }
 
-    public double get_grant_total() {
+    public double getGrandTotal() {
         double total = 0;
         for (CartItem item : items) {
             total += item.getSubtotal();

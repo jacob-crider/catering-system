@@ -1,6 +1,5 @@
 package com.techelevator.view;
 
-import com.techelevator.filereader.InventoryFileReader;
 import com.techelevator.items.CateringItem;
 
 import java.util.Map;
@@ -78,20 +77,20 @@ public class Menu {
 
 	public String getProduct() {
 		System.out.print("Product code: ");
-		String code = in.nextLine();
-		return code;
+		String productCode = in.nextLine();
+		return productCode;
 	}
 
 	public void printReport(ShoppingCart cart) {
 		for (CartItem item : cart.getItems()) {
 			System.out.printf("%3d %-10s %-15s $%8.2f $%8.2f\n",
-					item.getQty(),
+					item.getItemQuantity(),
 					item.getItem().getItemType(),
 					item.getItem().getNameOfItem(),
 					item.getItem().getPriceOfItem(),
 					item.getSubtotal());
 		}
-		System.out.println("\nTotal: $" + cart.get_grant_total());
+		System.out.println("\nTotal: $" + cart.getGrandTotal());
 	}
 
 	public void printChange(MoneyHandler handler) {

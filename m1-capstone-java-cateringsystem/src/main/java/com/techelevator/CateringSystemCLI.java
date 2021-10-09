@@ -58,11 +58,10 @@ public class CateringSystemCLI {
 				THEN go to the purchase menu
 			*/
 
-			// fileReader.itemsInInventory is calling our method which contains the Map of key/values pairs we created
+			// fileReader.itemsInInventory is calling our method which contains the Map of key/value pairs we created
 			cateringSystem.setInventoryMap(fileReader.itemsInInventory());
 
 			String userChoice = menu.mainMenu();
-//			String userChoiceTwo = menu.addUserMoney();
 
 			if(userChoice.equals("1")){
 				menu.printCateringItems(cateringSystem.getInventoryMap());
@@ -77,44 +76,44 @@ public class CateringSystemCLI {
 		}
 	}
 
-	// pass moneyHandler in menu.orderMenu() on 80
+
 	public void orderingMenu() {
 		while (true) {
 			String userChoiceTwo = menu.orderMenu(moneyHandler.getBalance());
 			if (userChoiceTwo.equals("1")) {
-				int amt = menu.addUserMoney();
-				moneyHandler.addMoney(amt);
+				int amountToAdd = menu.addUserMoney();
+				moneyHandler.addMoney(amountToAdd);
 			}
 			else if (userChoiceTwo.equals("2")) {
 				// SELECT PRODUCT
-				String code = menu.getProduct();
-				int qty = menu.getQuantity();
+				String productCode = menu.getProduct();
+				int quantity = menu.getQuantity();
 
-				CateringItem prod = get_product(code, cateringSystem.getInventoryMap());
-				System.out.println("Begin: " + prod.getQuantity());
-				if (prod == null) {
-					menu.printMessage("The product code doesn't exist.");
+				CateringItem product = productStock(productCode, cateringSystem.getInventoryMap());
+				System.out.println("Beginning stock: " + product.getQuantity());
+				if (product == null) {
+					menu.printMessage("This product doesn't exist.");
 				}
-				else if (prod.is_out_of_stock()) {
-					menu.printMessage("Sorry, the product is out of stock.");
+				else if (product.isOutOfStock()) {
+					menu.printMessage("Sorry, this product is out of stock.");
 				}
-				else if (qty > prod.getQuantity()) {
+				else if (quantity > product.getQuantity()) {
 					menu.printMessage("Insufficient stock");
 				}
 				else {
-					double subtotal = cart.addItem(prod, qty);
+					double subtotal = cart.addItem(product, quantity);
 					moneyHandler.deductMoney(subtotal);
-					prod.bought(qty);
-					System.out.println("End: " + prod.getQuantity());
+					product.boughtProduct(quantity);
+					System.out.println("End stock: " + product.getQuantity());
 				}
 			}
 			else if (userChoiceTwo.equals("3")) {
 				// COMPLETE TRANSACTION
 				menu.printReport(cart);
-//				updateStocks();
+				updateStocks();
 				moneyHandler.getChange();
 				menu.printChange(moneyHandler);
-				moneyHandler.reset_balance();
+				moneyHandler.resetBalance();
 
 				break;
 			}
@@ -123,12 +122,12 @@ public class CateringSystemCLI {
 
 	private void updateStocks() {
 		for (CartItem item : cart.getItems()) {
-			CateringItem prod = get_product(item.getItem().getItemCode(), cateringSystem.getInventoryMap());
-			prod.bought(item.getItem().getQuantity());
+			CateringItem cateringItem = productStock(item.getItem().getItemCode(), cateringSystem.getInventoryMap());
+			cateringItem.boughtProduct(item.getItem().getQuantity());
 		}
 	}
 
-	private CateringItem get_product(String code, Map<String, CateringItem> inventoryItems) {
+	private CateringItem productStock(String code, Map<String, CateringItem> inventoryItems) {
 		for (Map.Entry<String, CateringItem> items : inventoryItems.entrySet()) {
 			if (code.equalsIgnoreCase(items.getKey()))
 				return items.getValue();

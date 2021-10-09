@@ -3,22 +3,23 @@ package com.techelevator.view;
 import com.techelevator.items.CateringItem;
 
 public class CartItem {
+
     private CateringItem item;
-    private int qty;
+    private int itemQuantity;
     private double subtotal;
 
-    public CartItem(CateringItem item, int qty) {
+    public CartItem(CateringItem item, int quantity) {
         this.item = item;
-        this.qty = qty;
-        this.subtotal = item.getPriceOfItem() * qty;
+        this.itemQuantity = quantity;
+        this.subtotal = item.getPriceOfItem() * quantity;
     }
 
     public CateringItem getItem() {
         return item;
     }
 
-    public int getQty() {
-        return qty;
+    public int getItemQuantity() {
+        return itemQuantity;
     }
 
     public double getSubtotal() {

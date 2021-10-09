@@ -57,7 +57,7 @@ public class MoneyHandler {
         balance -= nickels * 0.05;
     }
 
-    public void reset_balance() {
+    public void resetBalance() {
         balance = 0;
     }
 

@@ -30,6 +30,7 @@ public class CateringItem {
         quantity = STARTING_QUANTITY;
     }
 
+    //Switch statement for cleaner code
     public String getItemType() {
         switch (itemType) {
             case "A":
@@ -45,7 +46,7 @@ public class CateringItem {
         }
     }
 
-    public boolean is_out_of_stock() {
+    public boolean isOutOfStock() {
         return (quantity == 0);
     }
 
@@ -66,7 +67,7 @@ public class CateringItem {
         return quantity;
     }
 
-    public void bought(int qty) {
-        quantity -= qty;
+    public void boughtProduct(int quantityPurchased) {
+        quantity -= quantityPurchased;
     }
 }
