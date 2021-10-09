@@ -77,9 +77,14 @@ public class CateringSystemCLI {
 	// pass moneyHandler in menu.orderMenu() on 80
 	public void orderingMenu() {
 		while (true) {
-			String userChoiceTwo = menu.orderMenu();
+			String userChoiceTwo = menu.orderMenu(moneyHandler.getBalance());
 			if (userChoiceTwo.equals("1")) {
-				menu.addUserMoney();
+				int amt = menu.addUserMoney();
+				moneyHandler.addMoney(amt);
+			}
+			else if (userChoiceTwo.equals("2")) {
+				// SELECT PRODUCT
+
 			}
 		}
 	}

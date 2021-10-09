@@ -15,7 +15,7 @@ import java.util.Scanner;
  * should include no "work" that is the job of the catering system.
  */
 public class Menu {
-	
+
 	private static final Scanner in = new Scanner(System.in);
 
 	public void showWelcomeMessage() {
@@ -50,23 +50,33 @@ public class Menu {
 		}
 	}
 
-	public String orderMenu() {
+	public String orderMenu(double bal) {
 		System.out.println();
 		System.out.println("(1) Add Money");
 		System.out.println("(2) Select Product");
 		System.out.println("(3) Complete Transaction");
-		System.out.println("Current Amount Balance: ");
+		System.out.println("Current Amount Balance: $" + bal);
 		System.out.println();
 		System.out.println("Please select one of these options: ");
 		String userChoiceTwo = in.nextLine();
 		return userChoiceTwo;
 	}
 
-	public String addUserMoney() {
+	public int addUserMoney() {
 		System.out.println("Please enter money to be added in whole dollar amounts: $");
-		String userChoiceTwo = in.nextLine();
+		int userChoiceTwo = in.nextInt();
 		return userChoiceTwo;
 	}
+
+
+	public void getProductSelection(Map<String, CateringItem> inventoryItems) {
+		System.out.print("Product code: ");
+		String code = in.nextLine();
+		System.out.print("Quantity: ");
+		int qty = in.nextInt();
+	}
+
+	private boolean 
 
 	//Need user input to choose from main menu (this class has main method to execute)
 	//Need user input to choose 1-3
