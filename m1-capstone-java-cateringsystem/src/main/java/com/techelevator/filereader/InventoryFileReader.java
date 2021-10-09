@@ -14,8 +14,6 @@ public class InventoryFileReader {
 
     //This class will read the csv file
 
-    private String inventoryFileName;
-
     //We want to add a max value (25) of each item
 
 

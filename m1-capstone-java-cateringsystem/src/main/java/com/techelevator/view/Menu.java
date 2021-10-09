@@ -3,8 +3,6 @@ package com.techelevator.view;
 import com.techelevator.filereader.InventoryFileReader;
 import com.techelevator.items.CateringItem;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -19,7 +17,6 @@ import java.util.Scanner;
 public class Menu {
 	
 	private static final Scanner in = new Scanner(System.in);
-
 
 	public void showWelcomeMessage() {
 		System.out.println("*************************");
@@ -40,7 +37,7 @@ public class Menu {
 		System.out.println("(2) Order");
 		System.out.println("(3) Quit");
 		System.out.println();
-        System.out.println("Please select one of the options:");
+        System.out.println("Please select one of these options: ");
 		String userChoice = in.nextLine();
 		return userChoice;
 
@@ -53,12 +50,22 @@ public class Menu {
 		}
 	}
 
-	public void purchasingMenu() {
+	public String orderMenu() {
 		System.out.println();
 		System.out.println("(1) Add Money");
 		System.out.println("(2) Select Product");
 		System.out.println("(3) Complete Transaction");
 		System.out.println("Current Amount Balance: ");
+		System.out.println();
+		System.out.println("Please select one of these options: ");
+		String userChoiceTwo = in.nextLine();
+		return userChoiceTwo;
+	}
+
+	public String addUserMoney() {
+		System.out.println("Please enter money to be added in whole dollar amounts: $");
+		String userChoiceTwo = in.nextLine();
+		return userChoiceTwo;
 	}
 
 	//Need user input to choose from main menu (this class has main method to execute)

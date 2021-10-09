@@ -3,6 +3,7 @@ package com.techelevator;
 import com.techelevator.filereader.InventoryFileReader;
 import com.techelevator.items.CateringItem;
 import com.techelevator.view.Menu;
+import com.techelevator.view.MoneyHandler;
 
 import java.util.Map;
 
@@ -18,16 +19,17 @@ import java.util.Map;
 public class CateringSystemCLI {
 
 	/*
-	 * The menu class is instantiated in the main() method at the bottom of this file.  
-	 * It is the only class instantiated in the starter code.  
+	 * The menu class is instantiated in the main() method at the bottom of this file.
+	 * It is the only class instantiated in the starter code.
 	 * You will need to instantiate all other classes using the new keyword before you can use them.
-	 * 
+	 *
 	 * Remember every class and data structure is a data types and can be passed as arguments to methods or constructors.
 	 */
 	private Menu menu;
 	private CateringSystem cateringSystem = new CateringSystem();
 	private InventoryFileReader fileReader = new InventoryFileReader(); // instantiated fileReader
 	private CateringItem cateringItem = new CateringItem();
+	private MoneyHandler moneyHandler = new MoneyHandler();
 
 
 	public CateringSystemCLI(Menu menu) {
@@ -57,18 +59,34 @@ public class CateringSystemCLI {
 			cateringSystem.setInventoryMap(fileReader.itemsInInventory());
 
 			String userChoice = menu.mainMenu();
+//			String userChoiceTwo = menu.addUserMoney();
+
 			if(userChoice.equals("1")){
 				menu.printCateringItems(cateringSystem.getInventoryMap());
 			}
-			if(userChoice.equals("2")) {
-				menu.purchasingMenu();
+			else if(userChoice.equals("2")) {
+				orderingMenu();
 			}
-
+			else if (userChoice.equals("3")) {
+				//Quit
+			}
+			break;
 		}
 	}
 
+	// pass moneyHandler in menu.orderMenu() on 80
+	public void orderingMenu() {
+		while (true) {
+			String userChoiceTwo = menu.orderMenu();
+			if (userChoiceTwo.equals("1")) {
+				menu.addUserMoney();
+			}
+		}
+	}
+
+
 	/*
-	 * This starts the application, but you shouldn't need to change it.  
+	 * This starts the application, but you shouldn't need to change it.
 	 */
 	public static void main(String[] args) {
 		Menu menu = new Menu();
