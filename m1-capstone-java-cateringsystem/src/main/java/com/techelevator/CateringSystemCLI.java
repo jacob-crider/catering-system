@@ -2,8 +2,10 @@ package com.techelevator;
 
 import com.techelevator.filereader.InventoryFileReader;
 import com.techelevator.items.CateringItem;
+import com.techelevator.view.CartItem;
 import com.techelevator.view.Menu;
 import com.techelevator.view.MoneyHandler;
+import com.techelevator.view.ShoppingCart;
 
 import java.util.Map;
 
@@ -30,6 +32,7 @@ public class CateringSystemCLI {
 	private InventoryFileReader fileReader = new InventoryFileReader(); // instantiated fileReader
 	private CateringItem cateringItem = new CateringItem();
 	private MoneyHandler moneyHandler = new MoneyHandler();
+	private ShoppingCart cart = new ShoppingCart();
 
 
 	public CateringSystemCLI(Menu menu) {
@@ -69,8 +72,8 @@ public class CateringSystemCLI {
 			}
 			else if (userChoice.equals("3")) {
 				//Quit
+				break;
 			}
-			break;
 		}
 	}
 
@@ -84,9 +87,53 @@ public class CateringSystemCLI {
 			}
 			else if (userChoiceTwo.equals("2")) {
 				// SELECT PRODUCT
+				String code = menu.getProduct();
+				int qty = menu.getQuantity();
 
+				CateringItem prod = get_product(code, cateringSystem.getInventoryMap());
+				System.out.println("Begin: " + prod.getQuantity());
+				if (prod == null) {
+					menu.printMessage("The product code doesn't exist.");
+				}
+				else if (prod.is_out_of_stock()) {
+					menu.printMessage("Sorry, the product is out of stock.");
+				}
+				else if (qty > prod.getQuantity()) {
+					menu.printMessage("Insufficient stock");
+				}
+				else {
+					double subtotal = cart.addItem(prod, qty);
+					moneyHandler.deductMoney(subtotal);
+					prod.bought(qty);
+					System.out.println("End: " + prod.getQuantity());
+				}
+			}
+			else if (userChoiceTwo.equals("3")) {
+				// COMPLETE TRANSACTION
+				menu.printReport(cart);
+//				updateStocks();
+				moneyHandler.getChange();
+				menu.printChange(moneyHandler);
+				moneyHandler.reset_balance();
+
+				break;
 			}
 		}
+	}
+
+	private void updateStocks() {
+		for (CartItem item : cart.getItems()) {
+			CateringItem prod = get_product(item.getItem().getItemCode(), cateringSystem.getInventoryMap());
+			prod.bought(item.getItem().getQuantity());
+		}
+	}
+
+	private CateringItem get_product(String code, Map<String, CateringItem> inventoryItems) {
+		for (Map.Entry<String, CateringItem> items : inventoryItems.entrySet()) {
+			if (code.equalsIgnoreCase(items.getKey()))
+				return items.getValue();
+		}
+		return null;
 	}
 
 

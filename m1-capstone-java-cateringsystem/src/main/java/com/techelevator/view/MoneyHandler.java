@@ -4,12 +4,13 @@ public class MoneyHandler {
 
     // Member Variables
     private double balance = 0;
-    private int hundreds;
-    private int fifties;
-    private int twenties;
-    private int tens;
-    private int fives;
-    private int singles;
+    private int twenties;  //20
+    private int tens;  //10
+    private int fives;  //5
+    private int ones; //1
+    private int quarters; //.25
+    private int dimes; //.10
+    private int nickels; //.05
     private static final int MAX_BALANCE = 4500;
 
     //Methods
@@ -28,15 +29,39 @@ public class MoneyHandler {
         }
     }
 
+    public void deductMoney(double amount) {
+        balance -= amount;
+    }
+
+    public void getChange() {
+        double balance = this.balance;
+        twenties = (int) balance / 20;
+        balance -= twenties * 20;
+
+        tens = (int) balance / 10;
+        balance -= tens * 10;
+
+        fives = (int) balance / 5;
+        balance -= fives * 5;
+
+        ones = (int) balance;
+        balance -= ones;
+
+        quarters = (int) (balance / 0.25);
+        balance -= quarters * 0.25;
+
+        dimes = (int) (balance / 0.10);
+        balance -= dimes * 0.10;
+
+        nickels = (int) (balance / 0.05);
+        balance -= nickels * 0.05;
+    }
+
+    public void reset_balance() {
+        balance = 0;
+    }
+
     //Getters
-    public int getHundreds() {
-        return hundreds;
-    }
-
-    public int getFifties() {
-        return fifties;
-    }
-
     public int getTwenties() {
         return twenties;
     }
@@ -49,11 +74,23 @@ public class MoneyHandler {
         return fives;
     }
 
-    public int getSingles() {
-        return singles;
-    }
-
     public double getBalance() {
         return balance;
+    }
+
+    public int getOnes() {
+        return ones;
+    }
+
+    public int getQuarters() {
+        return quarters;
+    }
+
+    public int getDimes() {
+        return dimes;
+    }
+
+    public int getNickels() {
+        return nickels;
     }
 }

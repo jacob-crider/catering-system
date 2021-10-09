@@ -65,22 +65,47 @@ public class Menu {
 	public int addUserMoney() {
 		System.out.println("Please enter money to be added in whole dollar amounts: $");
 		int userChoiceTwo = in.nextInt();
+		in.nextLine();
 		return userChoiceTwo;
 	}
 
-
-	public void getProductSelection(Map<String, CateringItem> inventoryItems) {
-		System.out.print("Product code: ");
-		String code = in.nextLine();
-		System.out.print("Quantity: ");
+	public int getQuantity() {
+		System.out.print("Enter quantity: ");
 		int qty = in.nextInt();
+		in.nextLine();
+		return qty;
 	}
 
-	private boolean 
+	public String getProduct() {
+		System.out.print("Product code: ");
+		String code = in.nextLine();
+		return code;
+	}
 
-	//Need user input to choose from main menu (this class has main method to execute)
-	//Need user input to choose 1-3
-//	String userInput = in.nextLine();
+	public void printReport(ShoppingCart cart) {
+		for (CartItem item : cart.getItems()) {
+			System.out.printf("%3d %-10s %-15s $%8.2f $%8.2f\n",
+					item.getQty(),
+					item.getItem().getItemType(),
+					item.getItem().getNameOfItem(),
+					item.getItem().getPriceOfItem(),
+					item.getSubtotal());
+		}
+		System.out.println("\nTotal: $" + cart.get_grant_total());
+	}
 
+	public void printChange(MoneyHandler handler) {
+		System.out.println("Change: $" + handler.getBalance());
+		System.out.println("\n\t" + handler.getTwenties() + " twenties");
+		System.out.println("\t" + handler.getTens() + " tens");
+		System.out.println("\t" + handler.getFives() + " fives");
+		System.out.println("\t" + handler.getOnes() + " ones");
+		System.out.println("\t" + handler.getQuarters() + " quarters");
+		System.out.println("\t" + handler.getDimes() + " dimes");
+		System.out.println("\t" + handler.getNickels() + " nickels");
+	}
 
+	public void printMessage(String msg) {
+		System.out.println(msg);
+	}
 }

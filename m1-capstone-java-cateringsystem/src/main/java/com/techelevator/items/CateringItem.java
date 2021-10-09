@@ -6,14 +6,13 @@ package com.techelevator.items;
 public class CateringItem {
 
     //This class will hold the information for Item and Price
-
+    private final int STARTING_QUANTITY = 25;
     //Member Variables
     private double priceOfItem;
     private String itemName;
     private String itemCode;
     private String itemType;
-    private int startingQuantity;
-    private int itemBought;
+    private int quantity;
 
 
     //Constructor
@@ -28,15 +27,26 @@ public class CateringItem {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.priceOfItem = priceOfItem;
-        startingQuantity = 25;
+        quantity = STARTING_QUANTITY;
     }
 
-    public int stockOfItem() {
-        if (startingQuantity == 0) {
-            return Integer.parseInt("SOLD OUT");
-        } else {
-            startingQuantity -= itemBought;
-        } return startingQuantity;
+    public String getItemType() {
+        switch (itemType) {
+            case "A":
+                return "Appetizer";
+            case "B":
+                return "Beverage";
+            case "D":
+                return  "Dessert";
+            case "E":
+                return "Entree";
+            default:
+                return "";
+        }
+    }
+
+    public boolean is_out_of_stock() {
+        return (quantity == 0);
     }
 
     //Getter
@@ -52,7 +62,11 @@ public class CateringItem {
         return itemCode;
     }
 
-    public int getStartingQuantity() {
-        return startingQuantity;
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void bought(int qty) {
+        quantity -= qty;
     }
 }
