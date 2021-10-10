@@ -1,9 +1,11 @@
+package com.techelevator;
+
 import com.techelevator.view.MoneyHandler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MoneyHandleTest {
+public class MoneyHandlerTest {
 
     private MoneyHandler moneyHandler;
     private static final int MAX_BALANCE = 4500;
