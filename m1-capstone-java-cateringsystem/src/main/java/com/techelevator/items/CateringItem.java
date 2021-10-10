@@ -30,20 +30,25 @@ public class CateringItem {
         quantity = STARTING_QUANTITY;
     }
 
+    //had to create this for unit testing
+    public CateringItem(int starting_quantity) {
+    }
+
     //Switch statement for cleaner code
-    public String getItemType() {
-        switch (itemType) {
-            case "A":
-                return "Appetizer";
-            case "B":
-                return "Beverage";
-            case "D":
-                return  "Dessert";
-            case "E":
-                return "Entree";
-            default:
-                return "";
-        }
+  public String getItemType() {
+
+      if (itemType == "A") {
+          return "Appetizer";
+      } else if (itemType == "B") {
+          return "Beverage";
+      } else if (itemType == "D") {
+          return "Dessert";
+      } else if (itemType == "E") {
+          return "Entree";
+      } return itemType;
+  }
+    public void boughtProduct(int quantityPurchased) {
+        this.quantity -= quantityPurchased;
     }
 
     public boolean isOutOfStock() {
@@ -65,9 +70,5 @@ public class CateringItem {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public void boughtProduct(int quantityPurchased) {
-        quantity -= quantityPurchased;
     }
 }

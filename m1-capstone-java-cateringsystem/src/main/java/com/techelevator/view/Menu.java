@@ -70,9 +70,9 @@ public class Menu {
 
 	public int getQuantity() {
 		System.out.print("Enter quantity: ");
-		int qty = in.nextInt();
+		int quantity = in.nextInt();
 		in.nextLine();
-		return qty;
+		return quantity;
 	}
 
 	public String getProduct() {
@@ -83,7 +83,7 @@ public class Menu {
 
 	public void printReport(ShoppingCart cart) {
 		for (CartItem item : cart.getItems()) {
-			System.out.printf("%3d %-10s %-15s $%8.2f $%8.2f\n",
+			System.out.printf("%3d %-10s %-10s $%5.2f $%5.2f\n",
 					item.getItemQuantity(),
 					item.getItem().getItemType(),
 					item.getItem().getNameOfItem(),
@@ -93,18 +93,18 @@ public class Menu {
 		System.out.println("\nTotal: $" + cart.getGrandTotal());
 	}
 
-	public void printChange(MoneyHandler handler) {
-		System.out.println("Change: $" + handler.getBalance());
-		System.out.println("\n\t" + handler.getTwenties() + " twenties");
-		System.out.println("\t" + handler.getTens() + " tens");
-		System.out.println("\t" + handler.getFives() + " fives");
-		System.out.println("\t" + handler.getOnes() + " ones");
-		System.out.println("\t" + handler.getQuarters() + " quarters");
-		System.out.println("\t" + handler.getDimes() + " dimes");
-		System.out.println("\t" + handler.getNickels() + " nickels");
+	public void printChange(MoneyHandler moneyHandler) {
+		System.out.println("Change: $" + moneyHandler.getBalance());
+		System.out.println("\n\t" + moneyHandler.getTwenties() + " twenties");
+		System.out.println("\t" + moneyHandler.getTens() + " tens");
+		System.out.println("\t" + moneyHandler.getFives() + " fives");
+		System.out.println("\t" + moneyHandler.getOnes() + " ones");
+		System.out.println("\t" + moneyHandler.getQuarters() + " quarters");
+		System.out.println("\t" + moneyHandler.getDimes() + " dimes");
+		System.out.println("\t" + moneyHandler.getNickels() + " nickels");
 	}
 
-	public void printMessage(String msg) {
-		System.out.println(msg);
+	public void printMessage(String message) {
+		System.out.println(message);
 	}
 }

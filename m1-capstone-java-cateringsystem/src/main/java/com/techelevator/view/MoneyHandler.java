@@ -21,6 +21,7 @@ public class MoneyHandler {
     //return to zero at end of the transaction
 
     public void addMoney(int amountToAdd) {
+
         if (balance < MAX_BALANCE) {
             balance += amountToAdd;
         }
@@ -34,7 +35,9 @@ public class MoneyHandler {
     }
 
     public void getChange() {
+
         double balance = this.balance;
+
         twenties = (int) balance / 20;
         balance -= twenties * 20;
 

@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.filereader.InventoryFileReader;
+import com.techelevator.filereader.LogFileWriter;
 import com.techelevator.items.CateringItem;
 import com.techelevator.view.CartItem;
 import com.techelevator.view.Menu;
@@ -33,6 +34,7 @@ public class CateringSystemCLI {
 	private CateringItem cateringItem = new CateringItem();
 	private MoneyHandler moneyHandler = new MoneyHandler();
 	private ShoppingCart cart = new ShoppingCart();
+	private LogFileWriter log = new LogFileWriter();
 
 
 	public CateringSystemCLI(Menu menu) {
@@ -90,7 +92,7 @@ public class CateringSystemCLI {
 				int quantity = menu.getQuantity();
 
 				CateringItem product = productStock(productCode, cateringSystem.getInventoryMap());
-				System.out.println("Beginning stock: " + product.getQuantity());
+				menu.printMessage("Beginning stock: " + product.getQuantity());
 				if (product == null) {
 					menu.printMessage("This product doesn't exist.");
 				}
@@ -104,7 +106,7 @@ public class CateringSystemCLI {
 					double subtotal = cart.addItem(product, quantity);
 					moneyHandler.deductMoney(subtotal);
 					product.boughtProduct(quantity);
-					System.out.println("End stock: " + product.getQuantity());
+					menu.printMessage("End stock: " + product.getQuantity());
 				}
 			}
 			else if (userChoiceTwo.equals("3")) {
@@ -114,7 +116,7 @@ public class CateringSystemCLI {
 				moneyHandler.getChange();
 				menu.printChange(moneyHandler);
 				moneyHandler.resetBalance();
-
+				//log.addMoneyLog();
 				break;
 			}
 		}
