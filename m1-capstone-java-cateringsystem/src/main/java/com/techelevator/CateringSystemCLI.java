@@ -116,7 +116,7 @@ public class CateringSystemCLI {
 				moneyHandler.getChange();
 				menu.printChange(moneyHandler);
 				moneyHandler.resetBalance();
-				//log.addMoneyLog();
+				log.addMoneyLog();
 				break;
 			}
 		}

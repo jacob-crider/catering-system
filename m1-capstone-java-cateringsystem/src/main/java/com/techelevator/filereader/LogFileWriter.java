@@ -16,37 +16,35 @@ import java.io.FileWriter;
  */
 public class LogFileWriter {
 
-   private CartItem cartLog;
-   private MoneyHandler money = new MoneyHandler();
-
    public LogFileWriter() {
    }
 
-   public void addMoneyLog() throws IOException {
+   public void addMoneyLog(){ //Pass through the class CartItem
 
       File newFile = new File("log.txt");
 
-      try (FileWriter log = new FileWriter(newFile)) {
+      try (FileWriter log = new FileWriter(newFile, true)) {
          log.write(this.getDateTime()); //this will write out the current date and time AM/PM
-         log.write("" + "ADD MONEY: $" + cartLog.getSubtotal() + " $" + money.getBalance());
+         log.write("" + "ADD MONEY: $" ); //had cartLog.getSubtotal() and money.getBalance()
       } catch (NullPointerException e) {
          e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
       }
-
    }
+
+//   public void giveChange() {
+//      try {
+//
+//
+//      }
+
 
    public String getDateTime() {
       Date date = new Date();
-      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a");
+      SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
       return dateFormat.format(date);
    }
 
-   public CartItem getCartLog() {
-      return cartLog;
-   }
-
-   public MoneyHandler getMoney() {
-      return money;
-   }
 }
 
