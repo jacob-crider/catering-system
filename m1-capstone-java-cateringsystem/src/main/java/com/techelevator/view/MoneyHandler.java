@@ -1,5 +1,9 @@
 package com.techelevator.view;
 
+import com.techelevator.items.CateringItem;
+
+import java.util.List;
+
 public class MoneyHandler {
 
     // Member Variables
@@ -63,6 +67,7 @@ public class MoneyHandler {
     public void resetBalance() {
         balance = 0;
     }
+
 
     //Getters
     public int getTwenties() {

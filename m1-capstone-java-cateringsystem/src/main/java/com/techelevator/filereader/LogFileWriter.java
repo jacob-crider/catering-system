@@ -19,13 +19,13 @@ public class LogFileWriter {
    public LogFileWriter() {
    }
 
-   public void addMoneyLog(){ //Pass through the class CartItem
+   public void logAction(String action, double logCalculation, double balance){ //Pass through the class CartItem
 
       File newFile = new File("log.txt");
 
       try (FileWriter log = new FileWriter(newFile, true)) {
          log.write(this.getDateTime()); //this will write out the current date and time AM/PM
-         log.write("" + "ADD MONEY: $" ); //had cartLog.getSubtotal() and money.getBalance()
+         log.write( action + " $" + logCalculation + " $" + balance + "\n");
       } catch (NullPointerException e) {
          e.printStackTrace();
       } catch (IOException e) {
@@ -33,16 +33,9 @@ public class LogFileWriter {
       }
    }
 
-//   public void giveChange() {
-//      try {
-//
-//
-//      }
-
-
    public String getDateTime() {
       Date date = new Date();
-      SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+      SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a ");
       return dateFormat.format(date);
    }
 

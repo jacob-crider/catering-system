@@ -8,6 +8,7 @@ public class CartItem {
     private int itemQuantity;
     private double subtotal;
 
+
     public CartItem(CateringItem item, int quantity) {
         this.item = item;
         this.itemQuantity = quantity;

@@ -1,6 +1,9 @@
 package com.techelevator;
 
 import com.techelevator.items.CateringItem;
+import com.techelevator.view.MoneyHandler;
+
+import java.util.List;
 import java.util.Map;
 
 
@@ -11,6 +14,9 @@ import java.util.Map;
 public class CateringSystem {
 
     //Member Variables
+    private MoneyHandler moneyHandler = new MoneyHandler();
+    private CateringItem cateringItem = new CateringItem();
+
 
     private int currentStock;
 
@@ -25,4 +31,6 @@ public class CateringSystem {
     public void setInventoryMap(Map<String, CateringItem> inventoryMap) {
         this.inventoryMap = inventoryMap;
     }
+
+
 }

@@ -80,16 +80,18 @@ public class CateringSystemCLI {
 
 
 	public void orderingMenu() {
+		LogFileWriter logFileWriter = new LogFileWriter();
 		while (true) {
 			String userChoiceTwo = menu.orderMenu(moneyHandler.getBalance());
 			if (userChoiceTwo.equals("1")) {
 				int amountToAdd = menu.addUserMoney();
 				moneyHandler.addMoney(amountToAdd);
+				logFileWriter.logAction("ADD MONEY:", amountToAdd, moneyHandler.getBalance() );
 			}
 			else if (userChoiceTwo.equals("2")) {
 				// SELECT PRODUCT
 				String productCode = menu.getProduct();
-				int quantity = menu.getQuantity();
+				int userQuantity = menu.getQuantity();
 
 				CateringItem product = productStock(productCode, cateringSystem.getInventoryMap());
 				menu.printMessage("Beginning stock: " + product.getQuantity());
@@ -99,14 +101,16 @@ public class CateringSystemCLI {
 				else if (product.isOutOfStock()) {
 					menu.printMessage("Sorry, this product is out of stock.");
 				}
-				else if (quantity > product.getQuantity()) {
+				else if (userQuantity > product.getQuantity()) {
 					menu.printMessage("Insufficient stock");
 				}
 				else {
-					double subtotal = cart.addItem(product, quantity);
+					double subtotal = cart.addItem(product, userQuantity);
 					moneyHandler.deductMoney(subtotal);
-					product.boughtProduct(quantity);
+					product.boughtProduct(userQuantity);
 					menu.printMessage("End stock: " + product.getQuantity());
+					logFileWriter.logAction(cart.recordAddedMoney(productCode, userQuantity),
+			           cart.recordedBalanceDifference(productCode, userQuantity), moneyHandler.getBalance());
 				}
 			}
 			else if (userChoiceTwo.equals("3")) {
@@ -115,8 +119,8 @@ public class CateringSystemCLI {
 				updateStocks();
 				moneyHandler.getChange();
 				menu.printChange(moneyHandler);
+				logFileWriter.logAction("GIVE CHANGE:", moneyHandler.getBalance(), 0.0);
 				moneyHandler.resetBalance();
-				log.addMoneyLog();
 				break;
 			}
 		}
